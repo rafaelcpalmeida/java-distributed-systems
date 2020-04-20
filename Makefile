@@ -27,6 +27,11 @@ build-server:	### Build RMI Server image
 build-client:	### Build RMI Client image
 	@docker build client/ -t rmi-client
 
+.PHONY: run-rabbitmq-server
+run-rabbitmq-server: ### Runs RabbitMQ 3.8 server instance. Web GUI on localhost:15672
+	@docker run -it --rm -p 15672:15672 --name=rmi_rabbit_mq_server --network=distributed_systems_docker_network \
+	rabbitmq:3.8-management
+
 .PHONY: run-web-server
 run-web-server: ### Runs Python 3 http.server on port 8000
 	@docker run -it --rm -p 8000:8000 --name=rmi_python_server --network=distributed_systems_docker_network \
