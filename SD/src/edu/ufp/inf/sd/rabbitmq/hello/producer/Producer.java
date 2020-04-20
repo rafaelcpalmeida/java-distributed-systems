@@ -1,4 +1,4 @@
-package edu.ufp.inf.sd.rabbitmq.simple_demo.producer;
+package edu.ufp.inf.sd.rabbitmq.hello.producer;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
@@ -11,7 +11,7 @@ public class Producer {
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost("rmi_rabbit_mq_server");
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
