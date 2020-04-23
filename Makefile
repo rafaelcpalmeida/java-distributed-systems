@@ -1,5 +1,4 @@
 # <3
-# https://news.ycombinator.com/item?id=11939200
 .PHONY: help
 help:	### this screen. Keep it first target to be default
 ifeq ($(UNAME), Linux)
@@ -51,6 +50,7 @@ endif
 
 	@docker run -it --rm -p 1099:1099 --name=rmi_run_server --network=distributed_systems_docker_network \
         -v "$(PWD)/bin:/app/bin" \
+        -v "$(PWD)/src:/app/src" \
         -v "$(PWD)/security-policies:/app/security-policies" \
         -v "$(PWD)/server:/app" \
         rmi-server bash -c "./run-server.sh $(JAR_LOCATION) $(JAR_NAME) $(PACKAGE_NAME) $(SERVICE_NAME)"
@@ -69,10 +69,7 @@ endif
 
 	@docker run -it --rm --name=rmi_run_client_$(INSTANCES) --network=distributed_systems_docker_network \
 	-v "$(PWD)/bin:/app/bin" \
+	-v "$(PWD)/src:/app/src" \
 	-v "$(PWD)/security-policies:/app/security-policies" \
 	-v "$(PWD)/client:/app" \
 	rmi-client bash -c "./run-client.sh $(JAR_LOCATION) $(JAR_NAME) $(PACKAGE_NAME) $(SERVICE_NAME)"
-
-.PHONY: update-files
-update-files: ### Copies builded files to proper location
-	cp -R /Users/rafaelalmeida/projects/java-distributed-systems/SD/out/production/SD/edu /Users/rafaelalmeida/projects/java-distributed-systems/bin/classes
