@@ -1,9 +1,9 @@
-package edu.ufp.inf.sd.rmi.visitor.test.server;
+package edu.ufp.inf.sd.rmi.visitor.server;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 
-public interface TestRI extends Remote {
+public interface VisitorRI extends Remote {
     String methodName() throws RemoteException;
 }

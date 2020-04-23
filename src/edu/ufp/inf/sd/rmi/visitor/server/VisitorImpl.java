@@ -1,13 +1,13 @@
-package edu.ufp.inf.sd.rmi.visitor.test.server;
+package edu.ufp.inf.sd.rmi.visitor.server;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 
-public class TestImpl extends UnicastRemoteObject implements TestRI {
+public class VisitorImpl extends UnicastRemoteObject implements VisitorRI {
 
 
-    public TestImpl() throws RemoteException {
+    public VisitorImpl() throws RemoteException {
         super();
     }
 

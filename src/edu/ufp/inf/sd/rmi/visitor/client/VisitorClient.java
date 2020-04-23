@@ -1,7 +1,7 @@
-package edu.ufp.inf.sd.rmi.visitor.test.client;
+package edu.ufp.inf.sd.rmi.visitor.client;
 
 import edu.ufp.inf.sd.rmi.util.rmisetup.SetupContextRMI;
-import edu.ufp.inf.sd.rmi.visitor.test.server.TestRI;
+import edu.ufp.inf.sd.rmi.visitor.server.VisitorRI;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -9,31 +9,31 @@ import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class  TestClient {
+public class VisitorClient {
 
 
     private SetupContextRMI contextRMI;
-    private TestRI myRI;
+    private VisitorRI myRI;
 
     public static void main(String[] args) {
         if (args != null && args.length < 2) {
             System.exit(-1);
         } else {
             assert args != null;
-            TestClient clt = new TestClient(args);
+            VisitorClient clt = new VisitorClient(args);
             clt.lookupService();
             clt.playService();
         }
     }
 
-    public TestClient(String[] args) {
+    public VisitorClient(String[] args) {
         try {
             String registryIP   = args[0];
             String registryPort = args[1];
             String serviceName  = args[2];
             contextRMI = new SetupContextRMI(this.getClass(), registryIP, registryPort, new String[]{serviceName});
         } catch (RemoteException e) {
-            Logger.getLogger(TestClient.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(VisitorClient.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -42,7 +42,7 @@ public class  TestClient {
             Registry registry = contextRMI.getRegistry();
             if (registry != null) {
                 String serviceUrl = contextRMI.getServicesUrl(0);
-                myRI = (TestRI) registry.lookup(serviceUrl);
+                myRI = (VisitorRI) registry.lookup(serviceUrl);
             } else {
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "registry not bound (check IPs). :(");
             }

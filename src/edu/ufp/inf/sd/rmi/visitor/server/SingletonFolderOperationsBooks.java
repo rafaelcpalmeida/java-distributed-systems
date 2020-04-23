@@ -28,7 +28,7 @@ public class SingletonFolderOperationsBooks implements SingletonFoldersOperation
     }
     
     public synchronized static SingletonFolderOperationsBooks createSingletonFolderOperationsBooks(String folder){
-        if (singletonFolderOperationsBooks==null){
+        if (singletonFolderOperationsBooks == null){
             singletonFolderOperationsBooks = new SingletonFolderOperationsBooks(folder);
         }
         return singletonFolderOperationsBooks;
@@ -40,7 +40,7 @@ public class SingletonFolderOperationsBooks implements SingletonFoldersOperation
             File newFile = new File(this.folderBooks.getAbsolutePath() + "/" + fname);
             return newFile.createNewFile();
         } catch (IOException ex) {
-            Logger.getLogger(SingletonFolderOperationsMagazines.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

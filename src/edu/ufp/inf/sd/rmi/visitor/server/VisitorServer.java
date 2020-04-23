@@ -1,4 +1,4 @@
-package edu.ufp.inf.sd.rmi.visitor.test.server;
+package edu.ufp.inf.sd.rmi.visitor.server;
 
 import edu.ufp.inf.sd.rmi.util.rmisetup.SetupContextRMI;
 
@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class TestServer {
+public class VisitorServer {
 
 
     private SetupContextRMI contextRMI;
@@ -18,13 +18,13 @@ public class TestServer {
             System.exit(-1);
         } else {
             assert args != null;
-            TestServer srv = new TestServer(args);
+            VisitorServer srv = new VisitorServer(args);
             srv.rebindService();
         }
     }
 
 
-    public TestServer(String[] args) {
+    public VisitorServer(String[] args) {
         try {
             String registryIP   = args[0];
             String registryPort = args[1];
@@ -39,7 +39,7 @@ public class TestServer {
         try {
             Registry registry = contextRMI.getRegistry();
             if (registry != null) {
-                TestRI myRI = new TestImpl();
+                VisitorRI myRI = new VisitorImpl();
                 String serviceUrl = contextRMI.getServicesUrl(0);
                 registry.rebind(serviceUrl, myRI);
             } else {
