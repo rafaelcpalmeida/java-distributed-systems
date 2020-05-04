@@ -50,8 +50,15 @@ if [[ "${JAR_LOCATION}" != "empty" ]] && [[ "${JAR_NAME}" != "empty" ]]; then
     fi
 fi
 
+SERVER="rmi_run_server"
+PORT=1099
+if [[ "${SERVICE_NAME}" == "rabbitmq" ]]; then
+  SERVER="rmi_rabbit_mq_server"
+  PORT=4369
+fi
+
 attempts=0
-while ! nc -zvw3 rmi_run_server 1099; do
+while ! nc -zvw3 $SERVER $PORT; do
   sleep 3
   attempts=$((attempts + 1))
 
